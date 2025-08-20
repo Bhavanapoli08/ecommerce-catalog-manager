@@ -30,6 +30,50 @@ A scalable internal product management tool that supports dynamic categories and
 - **API**: RESTful with OpenAPI documentation
 - **Validation**: Comprehensive data validation and business rules
 
+Step 1: Database Design
+Deliverables:
+
+ERD (Entity Relationship Diagram): docs/images/erd-diagram.png
+
+Design write-up: docs/database-design.md
+
+ERD Preview
+![ERD](docs/images/erd-diagram Summary (Justification)
+
+Scalability via EAV: The schema uses an Entity–Attribute–Value pattern so new categories and attributes require only data inserts, not schema changes or migrations.
+
+Normalization & Integrity: Category-scoped attribute definitions live in category_attributes; product values live in product_attribute_values with strong FKs and unique constraints to enforce 3NF and avoid duplication.
+
+Typed Validation: value_text/value_number/value_bool/value_date plus option_id for ENUM. Validation metadata on category_attributes (min_number, max_number, regex, max_length, is_required, display_order) ensures type- and rule-safety.
+
+Future-Proofing: Category hierarchy (parent_id), soft activation flags, audit timestamps, and attribute_options for enumerations. Easily extensible to multi-category products, conditional validations, and new data types.
+
+For full details, see docs/database-design.md.
+
+Step 2: Class Design
+Deliverables:
+
+Class diagram (UML): docs/images/class-diagram.png
+
+Design write-up: docs/class-design.md
+
+Class Diagram Preview
+![Class Diagram](docs/images/class-diagram’s Modeled
+
+Category: manages hierarchy and lifecycle (add/update/getSubcategories/validateHierarchy)
+
+CategoryAttribute: defines data type, constraints, and validation rules (define/update/validateValue)
+
+AttributeOption: manages ENUM options (add/update/setDefault/reorder)
+
+Product: lifecycle and validation coordination (create/update/activate/deactivate/validateRequiredAttributes/getAttributeValues)
+
+ProductAttributeValue: typed storage and enforcement (setValue/updateValue/validateType/getTypedValue)
+
+ValidationRule/ValidationEngine (optional): structure for conditional and cross-attribute rules
+
+For full class responsibilities, relationships, and method descriptions, see docs/class-design.md.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -42,12 +86,10 @@ A scalable internal product management tool that supports dynamic categories and
 1. **Clone the repository**
 e-catalog-tool
 
-text
 
 2. **Start the database**
 docker-compose up -d
 
-text
 
 3. **Setup backend**
 cd backend
@@ -57,14 +99,12 @@ npx prisma migrate deploy
 npx prisma db seed
 npm run start:dev
 
-text
 
 4. **Setup frontend**
 cd frontend
 npm install
 npm run dev
 
-text
 
 5. **Access the application**
 - Frontend: http://localhost:5173
