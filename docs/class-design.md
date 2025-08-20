@@ -1,4 +1,5 @@
 Class Design
+
 This class model mirrors the database while encapsulating validation and lifecycle behavior. It keeps responsibilities clear and enables future extension (multi-category products, conditional rules).
 
 Class diagram
@@ -141,3 +142,4 @@ How UI uses this model
 Dynamic forms: Read CategoryAttribute definitions to render inputs by dataType; for ENUM, load AttributeOption sorted by sortOrder; apply hints and constraints (regex, maxLength, min/max).
 
 Validation feedback: On submit, backend re-validates using the same rules to ensure consistency.
+
