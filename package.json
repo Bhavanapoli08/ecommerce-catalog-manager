@@ -1,0 +1,16 @@
+{
+  "name": "ecommerce-catalog-tool",
+  "version": "1.0.0",
+  "description": "Internal eCommerce product catalog management tool with dynamic categories and attributes",
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "backend:dev": "cd backend && npm run start:dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "setup": "npm run backend:setup && npm run frontend:setup",
+    "backend:setup": "cd backend && npm install && npx prisma generate && npx prisma migrate deploy",
+    "frontend:setup": "cd frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
