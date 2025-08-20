@@ -258,4 +258,26 @@ The architecture supports future enhancements:
 ## 📝 License
 
 MIT License - see LICENSE file for details
+
 5. Final Setup Commands
+# 1) Start Postgres
+docker-compose up -d
+
+# 2) Backend setup (terminal A)
+cd backend
+npm install
+npx prisma generate
+npx prisma migrate deploy
+npx prisma db seed
+npm run start:dev
+
+# 3) Frontend setup (terminal B)
+cd frontend
+npm install
+npm run dev
+
+# 4) Access
+# Frontend: http://localhost:5173
+# Backend API: http://localhost:3000
+# Swagger: http://localhost:3000/api
+
