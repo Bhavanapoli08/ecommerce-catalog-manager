@@ -156,6 +156,50 @@ Interactive API documentation is available at `/api` endpoint when the backend i
 - **Validation feedback**: Real-time validation with helpful error messages
 - **Intuitive workflow**: Category → Attributes → Products logical flow
 
+📂 Repository Structure
+text
+ecommerce-catalog-manager/
+├── README.md
+├── docker-compose.yml
+├── setup.sh
+├── .gitignore
+├── .github/workflows/ci.yml
+├── docs/
+│   ├── database-design.md
+│   ├── class-design.md
+│   └── images/
+│       ├── erd-diagram.png
+│       └── class-diagram.png
+├── backend/
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── .env.example
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   └── seed.ts
+│   └── src/
+│       ├── main.ts
+│       ├── app.module.ts
+│       ├── prisma/
+│       │   ├── prisma.module.ts
+│       │   └── prisma.service.ts
+│       ├── categories/
+│       ├── attributes/
+│       └── products/
+└── frontend/
+    ├── package.json
+    ├── vite.config.ts
+    └── src/
+        ├── main.tsx
+        ├── App.tsx
+        ├── api/client.ts
+        └── pages/
+            ├── CategoriesPage.tsx
+            ├── AttributesPage.tsx
+            └── ProductsPage.tsx
+
+
+
 ## 📈 Extensibility
 
 The architecture supports future enhancements:
