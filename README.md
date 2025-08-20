@@ -31,6 +31,7 @@ A scalable internal product management tool that supports dynamic categories and
 - **Validation**: Comprehensive data validation and business rules
 
 Step 1: Database Design
+
 Deliverables:
 
 ERD (Entity Relationship Diagram): docs/images/erd-diagram.png
@@ -38,19 +39,21 @@ ERD (Entity Relationship Diagram): docs/images/erd-diagram.png
 Design write-up: docs/database-design.md
 
 ERD Preview
-![ERD](docs/images/erd-diagram Summary (Justification)
+![ERD](docs/images/erd-diagram.png)
 
-Scalability via EAV: The schema uses an Entity–Attribute–Value pattern so new categories and attributes require only data inserts, not schema changes or migrations.
+Justification
 
-Normalization & Integrity: Category-scoped attribute definitions live in category_attributes; product values live in product_attribute_values with strong FKs and unique constraints to enforce 3NF and avoid duplication.
+Scalability via EAV: The schema uses an Entity–Attribute–Value (EAV) pattern, so new categories and attributes require only data inserts, not schema changes or migrations.
 
-Typed Validation: value_text/value_number/value_bool/value_date plus option_id for ENUM. Validation metadata on category_attributes (min_number, max_number, regex, max_length, is_required, display_order) ensures type- and rule-safety.
+Normalization & Integrity: Category-scoped attribute definitions live in category_attributes; product values live in product_attribute_values with strong foreign keys (FKs) and unique constraints to enforce 3NF and avoid duplication.
+
+Typed Validation: Columns for value_text / value_number / value_bool / value_date plus option_id for ENUM. Validation metadata on category_attributes (min_number, max_number, regex, max_length, is_required, display_order) ensures type- and rule-safety.
 
 Future-Proofing: Category hierarchy (parent_id), soft activation flags, audit timestamps, and attribute_options for enumerations. Easily extensible to multi-category products, conditional validations, and new data types.
 
-For full details, see docs/database-design.md.
 
 Step 2: Class Design
+
 Deliverables:
 
 Class diagram (UML): docs/images/class-diagram.png
@@ -58,21 +61,23 @@ Class diagram (UML): docs/images/class-diagram.png
 Design write-up: docs/class-design.md
 
 Class Diagram Preview
-![Class Diagram](docs/images/class-diagram’s Modeled
+![Class Diagram](docs/images/class-diagram.png)
 
-Category: manages hierarchy and lifecycle (add/update/getSubcategories/validateHierarchy)
+Classes Modeled
 
-CategoryAttribute: defines data type, constraints, and validation rules (define/update/validateValue)
+Category: Manages hierarchy and lifecycle (add/update/getSubcategories/validateHierarchy)
 
-AttributeOption: manages ENUM options (add/update/setDefault/reorder)
+CategoryAttribute: Defines data type, constraints, and validation rules (define/update/validateValue)
 
-Product: lifecycle and validation coordination (create/update/activate/deactivate/validateRequiredAttributes/getAttributeValues)
+AttributeOption: Manages ENUM options (add/update/setDefault/reorder)
 
-ProductAttributeValue: typed storage and enforcement (setValue/updateValue/validateType/getTypedValue)
+Product: Handles lifecycle and validation coordination (create/update/activate/deactivate/validateRequiredAttributes/getAttributeValues)
 
-ValidationRule/ValidationEngine (optional): structure for conditional and cross-attribute rules
+ProductAttributeValue: Provides typed storage and enforcement (setValue/updateValue/validateType/getTypedValue)
 
-For full class responsibilities, relationships, and method descriptions, see docs/class-design.md.
+ValidationRule / ValidationEngine (optional): Structure for conditional and cross-attribute rules
+
+
 
 ## 🚀 Quick Start
 
