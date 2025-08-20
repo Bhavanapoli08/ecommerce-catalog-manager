@@ -1,4 +1,5 @@
 Database Design
+
 This schema enables dynamic product categories with custom, typed attributes, and products whose attribute values are validated and stored efficiently. It follows the Entity–Attribute–Value (EAV) pattern to maximize flexibility while preserving normalization and integrity.
 
 ERD
@@ -216,4 +217,5 @@ Integrity: FK constraints and uniqueness enforce correctness.
 Extensibility: Ready for rules, multi-category, and new data types.
 
 docs/class-design.md
+
 
